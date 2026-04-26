@@ -1,0 +1,28 @@
+# Routine Ops: The Escalation Matrix — Cursor Rules
+#
+# This file redirects to the full agent context system.
+# All detailed rules live in the .agent/ directory.
+
+## Quick Reference
+
+You are working on "Routine Ops: The Escalation Matrix" — a daily routine app
+with an SRE-inspired escalation engine. Tasks degrade through tiers (L0→L4)
+and impact a System Health Score.
+
+## MANDATORY: Read These Before Writing Code
+
+1. `.agent/project_context.md` — Core mechanics, entities, scoring
+2. `.agent/design_system_rules.md` — Visual language, colors, components
+3. `.agent/workflow_and_state_rules.md` — State machine, engine architecture
+4. `.agent/system_prompt.txt` — Full behavioral rules for AI agents
+
+## Critical Quick Rules
+
+- TypeScript strict mode. Zero `any`.
+- Tailwind CSS 4 with semantic tokens only (never raw hex).
+- Motion library via `motion/react` (NOT `framer-motion`).
+- Dexie.js for persistence. No global state stores.
+- Engine functions are PURE — no side effects, injectable timestamps.
+- TDD for escalation engine. Tests before implementation.
+- Check `src/components/UI.tsx` before creating new primitives.
+- All state colors resolved via `getEscalationClasses()`.

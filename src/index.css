@@ -4,15 +4,27 @@
   --font-sans: "Inter", "ui-sans-serif", "system-ui", "sans-serif";
   --font-mono: "Space Grotesk", "ui-monospace", "SFMono-Regular", "monospace";
 
+  /* Background & Surface */
   --color-background-void: #020617; /* slate-950 */
-  --color-surface-lvl1: rgba(255, 255, 255, 0.05); /* frosted base */
+  --color-surface-lvl1: rgba(255, 255, 255, 0.05);
   --color-surface-lvl2: rgba(255, 255, 255, 0.08);
+  --color-surface-lvl3: rgba(255, 255, 255, 0.12);
   --color-border-subtle: rgba(255, 255, 255, 0.1);
+  --color-border-strong: rgba(255, 255, 255, 0.2);
 
+  /* Escalation State Colors */
+  --color-green-nominal: #22c55e; /* green-500 — L0 NOMINAL */
+  --color-amber-warning: #f97316; /* orange-500 — L1 WARNING */
+  --color-orange-incident: #ea580c; /* orange-600 — L2 INCIDENT */
+  --color-red-critical: #ef4444; /* red-500 — L3 OUTAGE */
+  --color-red-catastrophe: #dc2626; /* red-600 — L4 CATASTROPHE */
+
+  /* System / Accent */
   --color-cyan-system: #3b82f6; /* blue-500 */
-  --color-amber-warning: #f97316; /* orange-500 */
-  --color-red-critical: #ef4444; /* red-500 */
+  --color-on-surface: #e2e8f0; /* slate-200 */
+  --color-on-surface-muted: #64748b; /* slate-500 */
 
+  /* Type Scale */
   --font-size-headline-xl: 48px;
   --font-size-headline-md: 24px;
   --font-size-body-lg: 16px;
@@ -23,7 +35,7 @@
 
 @layer base {
   body {
-    @apply bg-background-void text-slate-200 font-sans;
+    @apply bg-background-void text-on-surface font-sans;
   }
 
   h1, h2, h3, .data-font {
@@ -31,10 +43,46 @@
   }
 }
 
+/* Custom Scrollbar — themed to match dark UI */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(59, 130, 246, 0.35) rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.35);
+  border-radius: 9999px;
+  transition: background 0.2s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.55);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: rgba(59, 130, 246, 0.7);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Frosted Card Pattern */
 .frosted-card {
   @apply backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl transition-all;
 }
 
+/* Mesh Gradient Background */
 .mesh-gradient {
   position: absolute;
   top: 0;
@@ -68,6 +116,7 @@
   border-radius: 9999px;
 }
 
+/* Scanning Line */
 .scanning-line {
     position: absolute;
     top: 0;
@@ -88,6 +137,7 @@
     100% { transform: translateY(100vh); opacity: 0; }
 }
 
+/* Terminal Cursor */
 .terminal-cursor {
     display: inline-block;
     width: 8px;
@@ -99,5 +149,17 @@
 
 @keyframes blink { 50% { opacity: 0; } }
 
-.glow-orange { box-shadow: 0 0 20px rgba(249, 115, 22, 0.5); }
+/* Glow Utilities — one per escalation color */
+.glow-green { box-shadow: 0 0 20px rgba(34, 197, 94, 0.5); }
+.glow-amber { box-shadow: 0 0 20px rgba(249, 115, 22, 0.5); }
+.glow-orange { box-shadow: 0 0 20px rgba(234, 88, 12, 0.5); }
+.glow-red { box-shadow: 0 0 20px rgba(239, 68, 68, 0.5); }
 .glow-blue { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .scanning-line,
+  .terminal-cursor {
+    animation: none;
+  }
+}

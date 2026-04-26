@@ -1,5 +1,4 @@
 import React from 'react';
-import { Terminal, Shield, AlertTriangle, X, Maximize2, Activity } from 'lucide-react';
 
 export const Frame = ({ title, children, className = "" }: { title: string; children: React.ReactNode; className?: string }) => (
   <div className={`frosted-card p-5 relative overflow-hidden ${className}`}>
@@ -31,7 +30,7 @@ export const StatusChip = ({ status, type = 'INFO' }: { status: string; type?: '
 export const Button = ({ children, variant = 'primary', onClick, className = "" }: { 
   children: React.ReactNode; 
   variant?: 'primary' | 'secondary' | 'critical' | 'ghost'; 
-  onClick?: () => void;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
 }) => {
   const styles = {
