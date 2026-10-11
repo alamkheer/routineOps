@@ -5,7 +5,10 @@ import {defineConfig} from 'vite';
 import {VitePWA} from 'vite-plugin-pwa';
 
 export default defineConfig(({mode}) => {
+  const isProduction = mode === 'production';
+
   return {
+    base: isProduction ? '/projects/routineops/v1/' : '/',
     plugins: [
       react(),
       tailwindcss(),
